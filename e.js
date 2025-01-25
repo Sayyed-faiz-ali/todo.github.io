@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path=require('path');
 const fs=require('fs');
+const port = process.env.PORT || 3000;
 //paser it is to handle the data in backend  
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -93,5 +94,6 @@ app.post('/del',function(req,res){
 //   // req.params.usernames
 //   res.send(req.params.usernames)
 // })
-
-app.listen(3000)
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
