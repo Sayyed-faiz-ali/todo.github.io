@@ -5,11 +5,20 @@ const port = process.env.PORT || 3000;
 const fs=require('fs');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+const dirPath = path.join(__dirname, 'files');
+
 app.use(express.static(path.join(__dirname,'pulic')))  //use to modiied and updae css and js 
 app.set("view engine",'ejs')
 
 
 
+
+
+if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true }); // Create directory if it doesn’t exist
+}
+
+console.log("Directory check complete.");
 
 
 app.get("/", function (req, res) {
