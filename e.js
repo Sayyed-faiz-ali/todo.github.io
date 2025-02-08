@@ -12,12 +12,16 @@ app.set("view engine",'ejs')
 
 
 
-app.get('/',function(req,res)
-{
-  fs.readdir('./files' ,function(err,files){
-  res.render("index",{files: files});
-})
-})
+app.get("/", function (req, res) {
+    fs.readdir("./files", function (err, files) {
+        if (err) {
+            console.error("Error reading directory:", err);
+            files = []; // Ensure files is an empty array if an error occurs
+        }
+        res.render("index", { files: files });
+    });
+});
+
 
 
 
