@@ -1,9 +1,8 @@
 const express = require("express");
 const app = express();
 const path=require('path');
-const fs=require('fs');
 const port = process.env.PORT || 3000;
-//paser it is to handle the data in backend  
+const fs=require('fs');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'pulic')))  //use to modiied and updae css and js 
@@ -20,31 +19,16 @@ app.get('/',function(req,res)
 })
 })
 
-// app.get('/file/:filename',function(req,res)
-// {
-//  fs.readFile(`.files/${req.params.filename}`,"utf-8",function(err,Filedata){
- 
-//   res.render('show',{filename:req.params.filename,Filedata : Filedata})
- 
-//   console.log(Filedata);
-  
-
-
-// });
-// })
 
 
 
 
 
 app.get('/file/:filename', (req, res) => {
-  // Construct the file path
   const filePath = path.join(__dirname, 'files', req.params.filename);
 
-  // Read the file
   fs.readFile(filePath, 'utf-8', (err, fileData) => {
 
-    // Render the file data
     res.render('show', { filename: req.params.filename, fileData });
   });
 });
@@ -82,18 +66,12 @@ app.post('/del',function(req,res){
     fs.unlink(`./files/${req.body.d1}`,function(err)
     {
      res.redirect('/')
-    // console.log(req
-    // .body.d1
+   
 });
     
     });
 
-// //:(: dynamic part ) it represnt variable
-// app.get('/profile/:usernames',function(req,res)
-// {
-//   // req.params.usernames
-//   res.send(req.params.usernames)
-// })
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
