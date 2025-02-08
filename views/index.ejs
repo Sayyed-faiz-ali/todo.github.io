@@ -19,25 +19,21 @@
             </form>
         </div>
         <div class="tasks  flex gap-3 flex-wrap  p-10">
-        <% if(files.length >0){%>
-            <% files.forEach(function(val){ %>
-                <div class="task min-w-72 px-3 py-4  rounded-md bg-zinc-800">
-                    <h1 class="text-white text-3xl tracking-tighter"><%= val %></h1>
-                    <div class="flex w-full justify-between mt-2">
-                    <a class="text-blue-800 inline-block "  href="/file/<%= val %>">Read More.</a>
-                    <a  class="text-zinc-600" href="/edit/<%= val %>">Edit Filename
-
-                    </a>
-                    <a class="text-zinc-500" href="/del/<%=val%>">Delete</a>
+            <% files = files || []; %>  <!-- Ensures files is at least an empty array -->
+            <% if (files.length > 0) { %>
+                <% files.forEach(function(val) { %>
+                    <div class="task min-w-72 px-3 py-4 rounded-md bg-zinc-800">
+                        <h1 class="text-white text-3xl tracking-tighter"><%= val %></h1>
+                        <div class="flex w-full justify-between mt-2">
+                            <a class="text-blue-800 inline-block" href="/file/<%= val %>">Read More.</a>
+                            <a class="text-zinc-600" href="/edit/<%= val %>">Edit Filename</a>
+                            <a class="text-zinc-500" href="/del/<%= val %>">Delete</a>
+                        </div>
                     </div>
-                   
-                </div>
-    
-            <% }) %>
+                <% }); %>
             <% } else { %>
                 <h1 class="text-zinc-600 text-white">No tasks yet.</h1>
-
-                <% } %>
+            <% } %>
             
          
 
